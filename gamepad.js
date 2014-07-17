@@ -912,7 +912,7 @@
 			if (entry !== -1) {
 				if ((typeof(entry) === 'number') && (entry < gamepad.buttons.length)) {
 					getter = function() {
-						return gamepad.buttons[entry];
+						return typeof gamepad.buttons === 'object' ? gamepad.buttons[entry].value : gamepad.buttons[entry];
 					};
 				}
 			} else if (buttons.byAxis && (index < buttons.byAxis.length)) {
