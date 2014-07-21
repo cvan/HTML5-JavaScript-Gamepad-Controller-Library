@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+      <meta charset="utf-8">
+</head>
+<body>
+
+<script src="jquery.min.js"></script>
+<script>var module = {exports: {}};</script>
+<script src="gamepad.js"></script>
+<script>
+
+var exports = module.exports;
+
+var galaxy = {
+  gamepad: exports.Gamepad
+};
+
+var gamepad = new galaxy.gamepad();
+
+gamepad.bind(galaxy.gamepad.Event.CONNECTED, function (device) {
+  console.error('Connected', device);
+});
+
+gamepad.bind(galaxy.gamepad.Event.BUTTON_DOWN, function (e) {
+  console.log(e.gamepad.index, e.control);
+  console.log(e.gamepad.state);
+});
+
+gamepad.bind(galaxy.gamepad.Event.BUTTON_UP, function (e) {
+  console.log(e.gamepad.index, e.control);
+});
+
+gamepad.bind(galaxy.gamepad.Event.AXIS_CHANGED, function (e) {
+  console.log(e.gamepad.index, e.axis, e.value);
+});
+
+if (!gamepad.init()) {
+  console.error('Your browser does not support gamepads; download ' +
+                'the latest Google Chrome or Mozilla Firefox.');
+}
+
+</script>
+</body>
+</html>
